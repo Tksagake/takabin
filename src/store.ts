@@ -1,18 +1,23 @@
+// store.ts
 import create from 'zustand';
+
+type UserRole = 'thrower' | 'collector' | 'admin';
 
 interface User {
   id: string;
   name: string;
-  role: 'admin' | 'collector' | 'thrower';
+  role: UserRole;
   points: number;
 }
 
-interface State {
+interface StoreState {
   user: User | null;
-  setUser: (user: User | null) => void;
+  setUser: (user: User) => void;
+  clearUser: () => void;
 }
 
-export const useStore = create<State>((set) => ({
+export const useStore = create<StoreState>((set) => ({
   user: null,
   setUser: (user) => set({ user }),
+  clearUser: () => set({ user: null }),
 }));

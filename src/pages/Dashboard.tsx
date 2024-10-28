@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { useStore } from '../store';
 import AdminDashboard from '../components/dashboard/AdminDashboard';
 import CollectorDashboard from '../components/dashboard/CollectorDashboard';

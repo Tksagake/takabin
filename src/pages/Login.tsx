@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import * as React from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { LogIn, UserPlus } from 'lucide-react';
 import { useStore } from '../store';
@@ -6,20 +7,42 @@ import { useStore } from '../store';
 export default function Login() {
   const [isLogin, setIsLogin] = useState(true);
   const [role, setRole] = useState<'thrower' | 'collector' | 'admin'>('thrower');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const navigate = useNavigate();
   const setUser = useStore((state) => state.setUser);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Simulate login/signup - In a real app, this would make an API call
-    setUser({
-      id: '1',
-      name: 'John Doe',
-      role: role,
-      points: 100,
-    });
+    
+    // Simulate API call for user authentication or registration
+    const user = {
+      id: '1', // In a real scenario, fetch this from your backend
+      name: name || 'John Doe', // Default name if not provided
+      role,
+      points: 100, // Example points, customize based on your logic
+    };
+
+    // Set user in global state
+    setUser(user);
+
+    // Optionally, store user info in local storage for persistence
+    localStorage.setItem('user', JSON.stringify(user));
+
+    // Redirect to the dashboard
     navigate('/dashboard');
   };
+
+  useEffect(() => {
+    // Optionally check if a user is already logged in on mount
+    const savedUser = localStorage.getItem('user');
+    if (savedUser) {
+      const parsedUser = JSON.parse(savedUser);
+      setUser(parsedUser);
+      navigate('/dashboard');
+    }
+  }, [setUser, navigate]);
 
   return (
     <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center px-4">
@@ -29,53 +52,53 @@ export default function Login() {
             {isLogin ? 'Welcome back' : 'Create an account'}
           </h2>
           <p className="mt-2 text-gray-600">
-            {isLogin
-              ? 'Sign in to your account'
-              : 'Join our waste management community'}
+            {isLogin ? 'Sign in to your account' : 'Join our waste management community'}
           </p>
         </div>
 
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+          {/* Name Input for Signup */}
           {!isLogin && (
             <div>
-              <label className="block text-sm font-medium text-gray-700">
-                Full Name
-              </label>
+              <label className="block text-sm font-medium text-gray-700">Full Name</label>
               <input
                 type="text"
                 required
+                value={name}
+                onChange={(e) => setName(e.target.value)}
                 className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-emerald-500 focus:border-emerald-500"
               />
             </div>
           )}
 
+          {/* Email Input */}
           <div>
-            <label className="block text-sm font-medium text-gray-700">
-              Email address
-            </label>
+            <label className="block text-sm font-medium text-gray-700">Email address</label>
             <input
               type="email"
               required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-emerald-500 focus:border-emerald-500"
             />
           </div>
 
+          {/* Password Input */}
           <div>
-            <label className="block text-sm font-medium text-gray-700">
-              Password
-            </label>
+            <label className="block text-sm font-medium text-gray-700">Password</label>
             <input
               type="password"
               required
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-emerald-500 focus:border-emerald-500"
             />
           </div>
 
+          {/* Role Selection for Signup */}
           {!isLogin && (
             <div>
-              <label className="block text-sm font-medium text-gray-700">
-                Role
-              </label>
+              <label className="block text-sm font-medium text-gray-700">Role</label>
               <select
                 value={role}
                 onChange={(e) => setRole(e.target.value as any)}

@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { Recycle, Trash2, Award, Users } from 'lucide-react';
 
@@ -79,7 +79,7 @@ export default function Home() {
             {
               step: 3,
               title: 'Schedule Collection',
-              description: 'Request a pickup when you're ready',
+              description: 'Request a pickup when you are ready',
               icon: <Trash2 className="h-6 w-6" />,
             },
             {
