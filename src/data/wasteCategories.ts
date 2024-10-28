@@ -1,0 +1,58 @@
+import { WasteCategory } from '../types';
+
+export const wasteCategories: WasteCategory[] = [
+  {
+    id: 'plastic',
+    name: 'Plastic',
+    description: 'Clean plastic items that can be recycled',
+    points: 10,
+    recyclable: true,
+    icon: 'bottle',
+    examples: ['Water bottles', 'Food containers', 'Clean plastic bags'],
+  },
+  {
+    id: 'paper',
+    name: 'Paper',
+    description: 'Clean paper and cardboard items',
+    points: 5,
+    recyclable: true,
+    icon: 'newspaper',
+    examples: ['Newspapers', 'Cardboard boxes', 'Office paper'],
+  },
+  {
+    id: 'glass',
+    name: 'Glass',
+    description: 'Glass bottles and containers',
+    points: 15,
+    recyclable: true,
+    icon: 'glass-water',
+    examples: ['Glass bottles', 'Jars', 'Glass containers'],
+  },
+  {
+    id: 'metal',
+    name: 'Metal',
+    description: 'Metal items and cans',
+    points: 20,
+    recyclable: true,
+    icon: 'container',
+    examples: ['Aluminum cans', 'Steel cans', 'Metal containers'],
+  },
+  {
+    id: 'organic',
+    name: 'Organic',
+    description: 'Food waste and organic materials',
+    points: 5,
+    recyclable: true,
+    icon: 'leaf',
+    examples: ['Food scraps', 'Garden waste', 'Coffee grounds'],
+  },
+  {
+    id: 'hazardous',
+    name: 'Hazardous',
+    description: 'Dangerous materials requiring special handling',
+    points: 0,
+    recyclable: false,
+    icon: 'alert-triangle',
+    examples: ['Batteries', 'Paint', 'Chemicals'],
+  },
+];
