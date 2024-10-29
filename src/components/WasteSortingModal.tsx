@@ -1,7 +1,6 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import { WasteCategory, WasteSortingResult } from '../types';
 import { X } from 'lucide-react';
-import { useState } from 'react';
 
 interface Props {
   category: WasteCategory;
@@ -14,10 +13,6 @@ export default function WasteSortingModal({ category, onClose, onSubmit }: Props
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (quantity < 1) {
-      alert('Quantity must be at least 1'); // Add a simple validation
-      return;
-    }
     onSubmit({
       categoryId: category.id,
       quantity,
@@ -44,11 +39,6 @@ export default function WasteSortingModal({ category, onClose, onSubmit }: Props
             ))}
           </ul>
         </div>
-        return (
-  <div className="max-w-7xl mx-auto px-4 py-8">
-    <h1>Waste Sorting Component Loaded</h1>
-  </div>
-);
 
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
@@ -66,7 +56,7 @@ export default function WasteSortingModal({ category, onClose, onSubmit }: Props
 
           {category.recyclable && (
             <p className="text-sm text-gray-600 mb-4">
-              You will earn {category.points * quantity} points for recycling {quantity} {quantity === 1 ? 'item' : 'items'}.
+              You will earn {category.points * quantity} points for recycling {quantity} {quantity === 1 ? 'item' : 'items'}
             </p>
           )}
 
@@ -89,5 +79,4 @@ export default function WasteSortingModal({ category, onClose, onSubmit }: Props
       </div>
     </div>
   );
-  
 }

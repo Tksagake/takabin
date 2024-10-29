@@ -1,4 +1,5 @@
 export interface WasteCategory {
+  iconUrl: string | undefined;
   id: string;
   name: string;
   description: string;

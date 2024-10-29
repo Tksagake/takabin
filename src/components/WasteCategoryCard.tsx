@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { WasteCategory } from '../types';
-import * as Icons from 'lucide-react'; // Ensure you're importing all icons
 
 interface Props {
   category: WasteCategory;
@@ -8,9 +7,6 @@ interface Props {
 }
 
 export default function WasteCategoryCard({ category, onSelect }: Props) {
-  // Make sure to use the correct icon name from your wasteCategories data
-  const Icon = Icons[category.icon as keyof typeof Icons];
-
   return (
     <button
       onClick={() => onSelect(category)}
@@ -18,17 +14,11 @@ export default function WasteCategoryCard({ category, onSelect }: Props) {
     >
       <div className="flex items-start space-x-4">
         <div className={`p-3 rounded-lg ${category.recyclable ? 'bg-emerald-100' : 'bg-red-100'}`}>
-          {/* Use the icon safely, check if it exists */}
-          {Icon ? (
-            <img 
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGc1Uuv3qbLCHlOkYv-4xnHf61Fkzvg9xgBQ&s" 
+          <img 
+            src={category.iconUrl} // Use the iconUrl from WasteCategory
             alt={category.name}
-            className={`h-6 w-6`} 
+            className="h-6 w-6" 
           />
-          
-          ) : (
-            <div className="h-6 w-6 bg-gray-300" /> // Fallback if icon doesn't exist
-          )}
         </div>
         <div className="flex-1">
           <h3 className="text-lg font-semibold text-gray-900">{category.name}</h3>
@@ -48,5 +38,6 @@ export default function WasteCategoryCard({ category, onSelect }: Props) {
         </div>
       </div>
     </button>
+    
   );
 }
